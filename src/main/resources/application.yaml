@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: platform
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydb
+    username: myuser
+    password: mypassword
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+discount:
+  combiningStrategy: HIGHEST
+  configurations:
+    - discountType: PERCENTAGE
+      discountPercentage: 0.10
+    - discountType: QUANTITY
+      rules:
+        - min: 1
+          max: 5
+          discountPercentage: 0.10
+        - min: 6
+          max: 10
+          discountPercentage: 0.20
+        - min: 11
+          max: ~
+          discountPercentage: 0.30
